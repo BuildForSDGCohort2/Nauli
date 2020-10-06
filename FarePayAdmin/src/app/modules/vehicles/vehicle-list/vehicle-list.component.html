@@ -1,0 +1,99 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex inline flex-row align-items-end">
+      <h1>Vehicles</h1>
+      <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+    </div>
+  <div *ngIf="isSaccoAdmin">
+    <button class="btn btn-primary" [routerLink]="['/vehicles/add']">Add Vehicle</button>
+  </div>
+</div>
+
+
+<div class="card mt-2">
+    <div class="row">
+
+      <div class="col-12">
+        <div class="card-header border-bottom d-flex justify-content-between p-2">
+          <div>
+            <input id="focusOnSearch" [formControl]="searchControl" type="text" placeholder="Search here.." class="form-control form-control-rounded">
+          </div>
+        </div>
+      </div>
+
+        <div class="col-md-12">
+            <div class="card shadow-none border-0">
+              <ngx-datatable
+              style="height: calc(100vh - 210px); box-shadow: none"
+              class="material fullscreen"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="60"
+              [scrollbarV]="true"
+              [loadingIndicator]="!filteredVehicles"
+              [sorts]="[{prop: 'name', dir: 'desc'}]"
+              [rows]="filteredVehicles">
+      
+                  <ngx-datatable-column name="vehicleType">
+                    <ng-template ngx-datatable-header-template>
+                      Vehicle Type
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="regNo">
+                    <ng-template ngx-datatable-header-template>
+                      Registration No.
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="owner">
+                    <ng-template ngx-datatable-header-template>
+                      Owner
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                      {{ row.owner | titlecase }}
+                   </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="cert">
+                    <ng-template ngx-datatable-header-template>
+                      TSL Certificate No.
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                       {{ row.tlb | uppercase }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="driver">
+                    <ng-template ngx-datatable-header-template>
+                      Driver
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                      {{ row.driver | titlecase }}
+                      <span class="text-muted" *ngIf="!row.driver">Unassigned</span>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="tout">
+                    <ng-template ngx-datatable-header-template>
+                      Tout
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                     {{ row.tout | titlecase }}
+                      <span class="text-muted" *ngIf="!row.tout">Unassigned</span>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column>
+                    <ng-template ngx-datatable-header-template>
+                      Actions
+                    </ng-template>
+                    
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                      <a class="cursor" [routerLink]="['/vehicles/detail', row.id]" *ngIf="!isSaccoAdmin">View</a> &nbsp; &nbsp;
+                      <a class="cursor" [routerLink]="['/vehicles/detail', row.id]"><i class="i-Eye" *ngIf="isSaccoAdmin"></i></a> &nbsp; &nbsp;
+                      <a class="cursor" [routerLink]="['/vehicles/edit', row.id]"><i class="i-Pen-3" *ngIf="isSaccoAdmin"></i></a> &nbsp; &nbsp;
+                      <a class="cursor" (click)="delete(row.id)" *ngIf="isSaccoAdmin"><i class="i-Close-Window"></i></a>
+                    </ng-template>
+                  </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+
+  
+</div>

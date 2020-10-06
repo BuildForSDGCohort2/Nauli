@@ -1,0 +1,133 @@
+
+<div class="mb-4">
+    <a class="d-flex justify-content-center">
+      <img width="180px" alt="Logo" src="assets/images/Logo.png" />
+    </a>
+    <p class="text-center text-15 text-primary">Simple & Transparent Fare Payments</p>
+  </div>
+
+<div class="auth-side-form" *ngIf="!canAddSacco">
+        <h2 class="text-center">Create your account</h2>
+
+        <form [formGroup]="signupForm" (ngSubmit)="submitUser()" class="container p-5">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Firstname</mat-label>
+                        <input matInput type="firstname" formControlName="firstname" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.firstname.hasError('required')">Firstname is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Lastname</mat-label>
+                        <input matInput type="lastname" formControlName="lastname" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.lastname.hasError('required')">Lastname is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Phone number</mat-label>
+                        <input matInput type="phone" formControlName="phone" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.phone.hasError('required')">Phone number is required</mat-error>
+                        <mat-error *ngIf="uForm.phone.hasError('pattern')">Invalid phone number</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="email" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.email.hasError('required')">email number is required</mat-error>
+                        <mat-error *ngIf="uForm.email.hasError('email')">Invalid email</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.password.hasError('required')">Password is required</mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field appearance="outline" class="mb-1">
+                        <mat-label>Confirm Password</mat-label>
+                        <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
+                        <mat-error *ngIf="uForm.password.hasError('required')">Phone number is required</mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button mat-button class="w-100 btn btn-primary text-white mat-btn-100">
+                <span *ngIf='!loading'>Next</span>
+            </button>
+        </form>
+
+
+        <div class="text-center mt-4">
+            <p class="text-muted">Already have account?&nbsp;<a [routerLink]="['/auth/login']"
+                    class="text-dark link">Login</a></p>
+        </div>
+</div>
+
+
+<div class="auth-side-form" *ngIf="canAddSacco">
+    <h2 class="text-center">Create your account</h2>
+
+    <form [formGroup]="saccoForm" class="container p-5">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Sacco Name</mat-label>
+                    <input matInput type="name" formControlName="name" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="sForm.name.hasError('required')">SACCO name is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Address</mat-label>
+                    <input matInput type="address" formControlName="address" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="sForm.address.hasError('required')">Address is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="phone" formControlName="phone" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="sForm.phone.hasError('required')">Phone number is required</mat-error>
+                    <mat-error *ngIf="sForm.phone.hasError('pattern')">Invalid phone number</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Support Email</mat-label>
+                    <input matInput type="email" formControlName="email" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="sForm.email.hasError('required')">email number is required</mat-error>
+                    <mat-error *ngIf="sForm.email.hasError('email')">Invalid email</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+      <div class="row">
+          <div class="col-6">
+            <button mat-button class="w-100 btn btn-primary text-white mat-btn-100" (click)="$event.stopPropagation()">
+                <span (click)="back()">Back</span>
+            </button>
+          </div>
+
+          <div class="col-6">
+            <button mat-button class="w-100 btn btn-primary text-white mat-btn-100" (click)="register()">
+                <span *ngIf='!loading'>Register</span>
+                <div *ngIf='loading'>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Registering...
+                </div>
+            </button>
+          </div>
+      </div>
+    </form>
+
+
+
+</div>
+
+<notifier-container></notifier-container>

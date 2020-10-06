@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="d-flex inline justify-content-between p-2 pb-0 mt-2">
+  <h4 class="pt-1 text-primary">Trip Details</h4>
+  <a [routerLink]="['/dashboard']">
+    <button class="btn btn-rounded btn-icon btn-outline-primary">
+      <i class="material-icons md-28 pt-1">keyboard_arrow_left</i>
+    </button>
+  </a>
+</div>
+
+
+<div class="user-profile o-hidden mr-3 ml-3 mb-5 pl-1 pr-1">
+  <app-vehicle-trip [trip]="trip" *ngIf="!!trip"></app-vehicle-trip>
+
+
+  <div class="container card border border-primary">
+    <agm-map [latitude]="currentPos.lat" [longitude]="currentPos.lng" [zoom]="zoom">
+      <agm-marker [latitude]="currentPos.lat" [longitude]="currentPos.lng"></agm-marker>
+      <!-- <agm-marker *ngFor="let point of tmpPoints " [latitude]="point.lat" [longitude]="point.lng"></agm-marker> -->
+      <agm-polyline strokeColor="red">
+        <agm-polyline-point *ngFor="let point of tmpPoints" [latitude]="point.lat" [longitude]="point.lng">
+        </agm-polyline-point>
+      </agm-polyline>
+    </agm-map>
+  </div>
+ 
+  
+</div>

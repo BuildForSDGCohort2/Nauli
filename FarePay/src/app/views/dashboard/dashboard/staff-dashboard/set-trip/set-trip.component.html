@@ -1,0 +1,92 @@
+<!-- NavBar -->
+<app-back-header></app-back-header>
+
+<div class="d-flex inline justify-content-between p-3 pb-0 mt-2 mb-2">
+  <h4 class="pt-1 text-primary">{{ !!id ? 'Edit Trip' : 'Set Trip'}}</h4>
+  <a [routerLink]="['/dashboard']">
+    <button class="btn btn-rounded btn-icon btn-outline-primary" >
+      <i class="material-icons md-28 pt-1">keyboard_arrow_left</i>
+    </button>
+  </a>
+</div>
+
+<div class="user-profile o-hidden mb-4">
+
+  <div *ngIf="!loading">
+
+
+
+    <div class="container">
+      <form [formGroup]="tripForm" (ngSubmit)="saveTrip()">
+        <div class="row">
+          <div class="col-md-6 form-group mb-3">
+            <label for="numPlate">Vehicle Reg No.</label>
+            <input type="text" disabled class="form-control " placeholder="Vehicle Reg No."  formControlName="numPlate"/>
+          </div>
+          <div class="col-md-6 form-group mb-3">
+            <label for="from">From</label>
+            <ng-select formControlName="starting_from" class="" >
+              <ng-option *ngFor="let item of routes" [value]="item">{{item}}
+              </ng-option>
+            </ng-select>
+
+          </div>
+
+          <div class="col-md-6 form-group mb-3">
+            <label for="to">To</label>
+            <ng-select formControlName="ending_at" class="" >
+                <ng-option *ngFor="let item of routes" [value]="item">{{item}}
+                </ng-option>
+            </ng-select>
+          </div>
+
+          <div class="col-md-6 form-group mb-3">
+            <label for="price">Fare pay</label>
+            <input class="form-control " type="number"  id="price" formControlName="price"
+              placeholder="price.." />
+              <div *ngIf="f.price.hasError('min')">
+                Minimum required number is {{minRate}}.
+              </div> 
+              <div *ngIf="f.price.hasError('max')">
+                Maximum required number is {{maxRate}}.
+              </div> 
+          </div>
+
+          <!-- <div class="col-md-6 form-group mb-3">
+            <label for="max_rate">Fare pay Max</label>
+            <input class="form-control " type="number"  id="max_rate" formControlName="max_rate"
+              placeholder="max_rate.." />
+              <div *ngIf="f.max_rate.hasError('min')">
+                Minimum required number is {{minRate}}.
+              </div> 
+              <div *ngIf="f.max_rate.hasError('max')">
+                Maximum required number is {{maxRate}}.
+              </div> 
+          </div> -->
+
+          <div class="col-6 form-group mb-3">
+            <label for="time">Start Time</label>
+            <ngb-timepicker formControlName="starting_time" class="w-100" id="time"></ngb-timepicker>
+          </div>
+
+          <div class="col-6 form-group mb-3" *ngIf="!!id">
+            <label for="endTime">End Time</label>
+            <ngb-timepicker formControlName="ending_time" class="w-100" id="endTime"></ngb-timepicker>
+          </div>
+
+        </div>
+        <div class="d-flex justify-content-between col-md-12 mt-4">
+          <button class="btn btn-primary btn-rounded w-100 m-0" data-toggle="tooltip" data-placement="bottom"
+            title="Save Notes">Save</button>
+        </div>
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+
+      </form>
+    </div>
+  </div>
+
+  <div class="center" *ngIf="loading">
+    <div class="loader-bubble loader-bubble-info m-5"></div>
+  </div>
+
+</div>

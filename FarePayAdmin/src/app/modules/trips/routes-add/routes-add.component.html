@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex inline flex-row align-items-end">
+        <h1>Routes</h1>
+        <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+    </div>
+</div>
+
+
+<div class="card  w-75">
+    <div class="card-header">
+        <h3>{{ !!routeId ? 'Edit' : 'Add' }} Route Details</h3>
+    </div>
+    <div class="card-body mb-0">
+
+        <form [formGroup]="form" class="container row p-2">
+
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Start Location</mat-label>
+                    <input matInput type="starting_from" formControlName="starting_from" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.starting_from.hasError('required')">Starting location is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>End Location</mat-label>
+                    <input matInput type="ending_at" formControlName="ending_at" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.ending_at.hasError('required')">End Location is required</mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Minimum Fare</mat-label>
+                    <input matInput type="minRate" formControlName="minRate" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.minRate.hasError('required')">Minimum fare is required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Maximum Fare</mat-label>
+                    <input matInput type="maxRate" formControlName="maxRate" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.maxRate.hasError('required')">Maximum fare is required</mat-error>
+                </mat-form-field>
+            </div>
+        </form>
+        <div class="m-0 pl-3 pr-4 pb-4 pt-0">
+            <div>
+                <button mat-button class="w-100 btn btn-primary text-white mat-btn-100" (click)="register()">
+                    <span *ngIf='!loading'>Save Route</span>
+                    <div *ngIf='loading'>
+                        <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                        Saving...
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<notifier-container></notifier-container>

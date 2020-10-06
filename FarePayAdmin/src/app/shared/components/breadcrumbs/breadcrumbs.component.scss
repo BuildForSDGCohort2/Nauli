@@ -1,0 +1,17 @@
+
+/* 06.Breadcrumb */
+.breadcrumb-container {
+    .breadcrumb {
+        padding: 0;
+    }
+  }
+  
+  .breadcrumb {
+    background-color: transparent;
+    color: rgb(177, 177, 177);
+  }
+  
+  .breadcrumb-item + .breadcrumb-item::before {
+    content: "|";
+  }
+  

@@ -1,0 +1,33 @@
+<div class="list-trip m-1" [@animate]="{ value: '*', params: { delay: 1 * 100 + 'ms', y: '50px' } }">
+<div class="small">
+  <section class="card">
+    <div class="row">
+      <div class="card__face__colored-side"></div>
+      <div class="col-4 dateData"  [routerLink]="['/seats/', trip.id]">
+        <img src="assets/images/busBlue.svg" alt="bus" />
+        <span class="text-center">{{ trip.vehicle.regNo }}</span>
+      </div>
+      <div class="col-8 card-content"  [routerLink]="['/map/', trip.id]">
+        <strong class="header"> {{ trip?.starting_from }} - {{ trip?.ending_at }}</strong>&nbsp;
+        <hr class="m-2 p-0 pb-1" />
+        Date: <span>{{ trip?.created_at | date  }}</span> <br />
+        Starting Time: <span>{{ trip?.starting_time  | date:'shortTime' }}</span>
+
+        <div class="d-flex justify-content-between mt-2 mb-2">
+          <div>
+            <a class="text-primary text-left" *ngIf="trip.price">Fare: KSH {{ trip?.price }}</a>
+            <a class="text-primary text-left" *ngIf="!trip.price">price: KSH {{ trip?.fare }}</a>
+          </div>
+          <div>
+            <a class="badge badge-primary text-6 pr-1 pl-1" *ngIf="!!trip &&  !trip.ending_time">In Progress</a>
+            <a class="badge badge-success text-6 pr-1 pl-1" *ngIf="!!trip && !!trip.ending_time">Complete</a>
+          </div>
+          
+        </div>
+        <div class="d-flex justify-content-between">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</div>

@@ -1,0 +1,61 @@
+img{
+    height: auto;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.text-detail{
+    color: #666;
+}
+
+.stuff {
+    margin: 0 auto;
+}
+
+.card {
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+    font-family: 'Open Sans';
+
+    margin: 15px -7px 15px -7px;
+    padding: 17px;
+    border-left: solid 3px #335291;
+    font-size: 14px;
+    color: #555;
+    font-weight: 400;
+
+    .dateData{
+        border-right: solid 1px #ccc;
+
+        p{
+            position: absolute;
+            bottom: 0;
+            margin-bottom: -5px;
+        }
+    }
+
+    .card-content{
+        .header{
+            font-size: 14px;
+        }
+
+        .location{
+            margin-top: 10px;
+            position: relaive;
+            bottom: 0;
+            margin-bottom: -5px;
+        }
+        a{
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    margin-top: 30%;
+    padding: 10px;
+}

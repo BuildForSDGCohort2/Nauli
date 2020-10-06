@@ -1,0 +1,221 @@
+<div *ngIf="user.role !== role.MOH">
+  <div class="">
+    <h1>Dashboard</h1>
+  </div>
+  <div class="separator-breadcrumb mb-4"></div>
+  
+  <div class="row">
+    <div class="col-lg-6 col-md-12">
+      <!-- CARD ICON -->
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Map-Marker"></i>
+              <p class="text-muted mt-2 mb-2">Today's Trips</p>
+              <p class="stats text-30 line-height-1 m-0">41</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Jeep"></i>
+              <p class="text-muted mt-2 mb-2">In-Transit</p>
+              <p class="stats text-30 line-height-1 m-0">18</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Information"></i>
+              <p class="text-muted mt-2 mb-2">Idle PSVs</p>
+              <p class="stats text-30 line-height-1 m-0">12</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Checked-User"></i>
+              <p class="text-muted mt-2 mb-2">Passengers Served</p>
+              <p class="stats text-30 line-height-1 m-0">201</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Administrator text-30"></i>
+              <p class="text-muted mt-2 mb-2">Passengers In-Transit</p>
+              <p class="stats text-30 line-height-1 m-0">75</p>
+            </div>
+          </div>
+        </div>
+  
+        <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-icon mb-4">
+            <div class="card-body text-center">
+              <i class="text-muted i-Money-2"></i>
+              <p class="text-muted mt-2 mb-2">Collected<br>Sum</p>
+              <p class="stats text-30 line-height-1 m-0">Ksh 50,000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-lg-6 col-md-12">
+      <div class="card mb-4">
+        <div class="card-body p-0">
+          <h3 class="card-title m-0 p-3 pb-0 mb-0">Payments over time</h3>
+          <div class="m-0 p-0 chart" echarts [options]="options" (chartInit)="onChartEvent($event, 'chartInit')"
+            (chartClick)="onChartEvent($event, 'chartClick')" (chartDblClick)="onChartEvent($event, 'chartDblClick')"
+            (chartMouseDown)="onChartEvent($event, 'chartMouseDown')"
+            (chartMouseUp)="onChartEvent($event, 'chartMouseUp')"
+            (chartMouseOver)="onChartEvent($event, 'chartMouseOver')"
+            (chartMouseOut)="onChartEvent($event, 'chartMouseOut')"
+            (chartGlobalOut)="onChartEvent($event, 'chartGlobalOut')"
+            (chartContextMenu)="onChartEvent($event, 'chartContextMenu')"
+            (chartDataZoom)="onChartEvent($event, 'chartDataZoom')">
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="col-md-12 mt-4">
+      <div class="card o-hidden mb-4">
+        <div class="card-header mb-0 pb-0">
+          <h3>Active Trips</h3>
+        </div>
+  
+        <div class="card-body mt-0 p-0">
+          <ngx-datatable style="height: calc(100vh - 280px); box-shadow: none" class="material fullscreen"
+          [columnMode]="'force'" [headerHeight]="45" [footerHeight]="50" [rowHeight]="45" [scrollbarV]="true"
+          [rows]="trips" [loadingIndicator]="!trips">
+          <ngx-datatable-column>
+            <ng-template ngx-datatable-header-template>
+              Route
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+              <span>{{row.starting_from}} - {{ row.ending_at }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column>
+            <ng-template ngx-datatable-header-template>
+              Vehicle Reg. No.
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span>{{ row.vehicle.regNo }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column>
+            <ng-template ngx-datatable-header-template>
+              Vehicle Type
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span>{{ row.vehicle.vehicleType }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="drive">
+            <ng-template ngx-datatable-header-template>
+              Driver
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <div>
+                <a [routerLink]="['/drivers', row.driver.id]">{{ row.driver.name| titlecase }}</a>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="tout">
+            <ng-template ngx-datatable-header-template>
+              Conductor
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <div>
+                <a [routerLink]="['/touts', row.tout.id]">{{ row.tout.name| titlecase }}</a>
+              </div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="time">
+            <ng-template ngx-datatable-header-template>
+              Period
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span *ngIf="row.ending_time">{{ row.starting_time | date:"HH:mm" }} - {{ row.ending_time | date:"HH:mm" }}</span>
+              <div *ngIf="!row.ending_time"> <span >{{ row.starting_time | date:"HH:mm" }} - </span> <span class="text-success">Ongoing</span></div>
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column>
+            <ng-template ngx-datatable-header-template>
+              Fare
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <span>KSH {{ row.max_rate }} / KSH{{ row.min_rate }}</span>
+            </ng-template>
+          </ngx-datatable-column>
+          
+          <ngx-datatable-column name="subtitle">
+            <ng-template ngx-datatable-header-template>
+              Actions
+            </ng-template>
+            <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <a [routerLink]="['/trips/detail', row.id]">
+              View</a> &nbsp;
+              <!-- <a class="cursor" (click)="delete(row.id)"><i class="i-Close-Window"></i></a> -->
+  
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  
+  
+  </div>
+</div>
+
+<div *ngIf="user.role === role.MOH">
+  <div class="row text-center moh d-flex justify-content-around">
+    <div class="col-12">
+     <h1>
+      Welcome {{ user.name | titlecase }}
+     </h1>
+     <h3>
+       Search for passenger and trip records from our vast database. <br>
+       Where do you want to start?
+     </h3>
+    </div>
+    <a class="col-4 pt-0" [routerLink]="['/trips']">
+      <div class="card moh-card d-flex align-items-center">
+
+        <img src="assets/images/carSearch.svg" alt="">
+       <h3> Query Trips</h3>
+       <p>Search for trips recorded for vehicles within our registered SACCOS</p>
+      </div>
+    </a>
+    <a class="col-4 pt-0" [routerLink]="['/passengers']">
+      <div class="card moh-card d-flex align-items-center">
+        <img src="assets/images/searchUser.svg" alt="">
+
+       <h3>Search Passenger</h3>
+       <p>Search for relevant details of passengers who traveled with vehicles from our registered SACCOS</p>
+      </div>
+    </a>
+    <a class="col-4 pt-0">
+      <div class="card moh-card d-flex align-items-center">
+        <img src="assets/images/report.svg" alt="">
+
+       <h3> View Reports</h3>
+       <p>View relevant reports and analytics from our recorded trips and transactions</p>
+
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<app-back-header></app-back-header>
+<div class="d-flex inline justify-content-between p-3 pb-0 mb-2">
+  <h4 class="pt-1 pl-3 text-primary">My Trips</h4>
+  <a [routerLink]="['/dashboard']">
+    <button class="btn btn-rounded btn-icon btn-outline-primary">
+      <i class="material-icons md-28 pt-1">keyboard_arrow_left</i>
+    </button>
+  </a>
+</div>
+
+<div class="user-profile o-hidden mb-4">
+
+  <div class="card-body mt-1 p-0">
+    <!-- <ngb-tabset class="nav-center mb-0"> -->
+      <!-- <ngb-tab title="This Week">
+        <ng-template ngbTabContent *ngFor="let trip of trips">
+            <div class="">
+                <app-vehicle-trip [trip]="trip" *ngIf="!!trip"></app-vehicle-trip>
+            </div>
+        </ng-template>
+      </ngb-tab> -->
+      <!-- <ngb-tab title="All Trips">
+        <ng-template ngbTabContent> -->
+            <div class="m-3" *ngFor="let trip of trips">
+                <app-vehicle-trip [trip]="trip" *ngIf="!!trip"></app-vehicle-trip>
+            </div>
+        <!-- </ng-template>
+      </ngb-tab>
+    </ngb-tabset> -->
+  </div>
+</div>

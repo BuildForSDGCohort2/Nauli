@@ -1,0 +1,74 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex inline flex-row align-items-end">
+      <h1>Vehicle Types</h1>
+      <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+    </div>
+  <div>
+    <button class="btn btn-primary" [routerLink]="['/vehicle-types/add']">Add Vehicle Type</button>
+  </div>
+</div>
+
+
+<div class="card mt-4 pt-3">
+    <div class="row pl-2 pr-2">
+        <div class="col-md-12">
+            <div class="card shadow-none border-0">
+              <ngx-datatable
+              style="height: calc(100vh - 170px); box-shadow: none"
+              class="material fullscreen"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50"
+              [rowHeight]="60"
+              [scrollbarV]="true"
+              [loadingIndicator]="!vehicleTypes"
+              [sorts]="[{prop: 'name', dir: 'desc'}]"
+              [rows]="vehicleTypes">
+      
+                  <ngx-datatable-column name="name" [width]="180">
+                    <ng-template ngx-datatable-header-template>
+                      Name
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="role" [width]="140">
+                    <ng-template ngx-datatable-header-template>
+                      No. of seats
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                       {{ row.seats_no }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="role" [width]="140">
+                    <ng-template ngx-datatable-header-template>
+                      Driver Seat Number
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                       {{ row.driver_seat_no }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="role" [width]="140">
+                    <ng-template ngx-datatable-header-template>
+                      Tout Seat Number
+                    </ng-template>
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                       {{ row.tout_seat_no }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column>
+                    <ng-template ngx-datatable-header-template>
+                      Actions
+                    </ng-template>
+                    
+                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                      <a class="cursor" [routerLink]="['/vehicle-types/edit', row.id]"><i class="i-Pen-3"></i></a> &nbsp; &nbsp;
+                      <a class="cursor" (click)="delete(row.id)"><i class="i-Close-Window"></i></a>
+                    </ng-template>
+                  </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+
+  
+</div>

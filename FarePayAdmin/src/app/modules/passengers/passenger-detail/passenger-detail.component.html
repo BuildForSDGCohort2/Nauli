@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex inline flex-row align-items-end">
+        <h1>Passenger Trips</h1>
+        <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                {{  passenger?.passenger_name  }} &nbsp; 
+                ({{  passenger?.pickup_at }}  - {{  passenger?.drop_at }} )
+            </div>
+            <div class="row p-2 mb-4">
+
+                <div class="col-lg-3 col-6 mt-3">
+                    <div class="row">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <i class="i-Telephone text-primary text-30"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="text-primary mb-1">Phone Number</p>
+                            <span>{{ passenger?.passenger_phone }}</span>
+                        </div>
+                    </div>
+                </div>
+        
+                <div class="col-lg-3 col-6 mt-3">
+                    <div class="row">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <i class="i-Calendar-4 text-primary text-30"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="text-primary mb-1">Trip Date</p>
+                            <span>{{ passenger?.created_at | date }}</span>
+                        </div>
+                    </div>
+                </div>
+            
+                <div class="col-lg-3 col-6 mt-3">
+                    <div class="row">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <i class="i-Over-Time text-primary text-30"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="text-primary mb-1">Time of Travel</p>
+                            <span>{{ passenger?.vehicleTrip?.starting_time | date:"HH:mm" }} ~ {{ passenger?.vehicleTrip?.ending_time | date:"HH:mm" }}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-lg-3 col-6 mt-3">
+                    <div class="row">
+                        <div class="col-md-3 d-flex align-items-center">
+                            <i class="i-Money1 text-primary text-30"></i>
+                        </div>
+                        <div class="col-md-9">
+                            <p class="text-primary mb-1">Fare Paid</p>
+                            <span>KSH {{ passenger?.fare }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <mat-tab-group animationDuration="0ms">
+                <mat-tab label="Route Details">
+                    <app-mapp></app-mapp>
+                </mat-tab>
+                <mat-tab label="Passenger's Other Trips"> 
+                    <app-trips [phone]="passenger.passenger_phone" *ngIf="!!passenger?.passenger_phone"></app-trips>
+                 </mat-tab>
+
+              </mat-tab-group>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Mini Bus - 14 Passengers</h3>
+            </div>
+
+            <div class="card-body">
+                <app-seatss [seatNo]="seatNo"></app-seatss>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,89 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex inline flex-row align-items-end">
+    <h1>Routes</h1>
+    <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+  </div>
+  <div>
+    <button class="btn btn-primary" [routerLink]="['/routes/add']">Add Routes</button>
+  </div>
+</div>
+
+
+<div class="row mt-4  w-100">
+  <div class="col-12 w-100">
+    <div class="card rounded  w-100">
+
+      <div class="w-100">
+        <div class="">
+          <div class="card shadow-none border">
+
+            <div class="card-header border-bottom d-flex justify-content-between p-2">
+              <div>
+                <input id="focusOnSearch" type="text" placeholder="Search here.."
+                  class="form-control form-control-rounded">
+              </div>
+
+            </div>
+            <ngx-datatable style="height: calc(100vh - 280px); box-shadow: none" class="material fullscreen"
+              [columnMode]="'force'" [headerHeight]="45" [footerHeight]="50" [rowHeight]="45" [scrollbarV]="true"
+              [rows]="routes" [loadingIndicator]="!routes">
+              <ngx-datatable-column>
+                <ng-template ngx-datatable-header-template>
+                  Route
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                  <span>{{row.starting_from}} &nbsp; {{ row.ending_at }}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="minRate">
+                <ng-template ngx-datatable-header-template>
+                  Minimum Fare
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <span> KSH {{ row.minRate }}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column>
+                <ng-template ngx-datatable-header-template>
+                  Maximum Fare
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <span>KSH {{ row.maxRate }}</span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="active">
+                <ng-template ngx-datatable-header-template>
+                  Status
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <div class="badge badge-success">
+                    <span>
+                      Active
+                    </span>
+                  </div>
+                  <!-- <div class="badge badge-danger" *ngIf="!row.active">
+                <span *ngIf='row.active'>
+                  Inactive
+                </span>
+              </div> -->
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="subtitle">
+                <ng-template ngx-datatable-header-template>
+                  Actions
+                </ng-template>
+                <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                  <a class="cursor" [routerLink]="['/routes/user/edit/', row.id]"><i class="i-Pen-3"></i></a> &nbsp;
+                  <a class="cursor" (click)="delete(row.id)"><i class="i-Close-Window"></i></a>
+
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

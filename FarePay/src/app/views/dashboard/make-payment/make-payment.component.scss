@@ -1,0 +1,246 @@
+.stopScroll {
+  height: 100vh;
+  overflow-y: hidden !important;
+}
+
+.cont {
+  position: relative;
+  width: 25%;
+  height: auto;
+  padding: 10px 25px;
+  padding-top: 0px;
+  margin: 10vh auto;
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.form {
+  width: 100%;
+  height: 100%;
+}
+
+h1,
+h2,
+.user,
+.pass {
+  text-align: center;
+  display: block;
+}
+
+h1 {
+  color: #606060;
+  font-weight: bold;
+  font-size: 40px;
+  margin: 30px auto;
+}
+
+.user,
+.pass,
+.login {
+  width: 100%;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: lighter;
+  margin-bottom: 30px;
+}
+
+.user,
+.pass {
+  background: #ecf0f1;
+}
+
+.login {
+  color: rgb(29, 29, 29);
+  text-align: center;
+  cursor: pointer;
+  background: #032f81;
+  transition: background 0.4s ease;
+}
+
+.login:hover {
+  background: #031f55;
+}
+
+@media only screen and (min-width: 280px) {
+  .cont {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .cont {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .cont {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .cont {
+    width: 30%;
+  }
+}
+
+h2 {
+  color: #666;
+  margin-top: 25px;
+}
+
+.details {
+  padding: 0;
+  width: 90%;
+  margin: 0 auto;
+
+  &.card {
+    border-radius: 3px;
+    border: 1px solid #ddd;
+  }
+
+  .card-header {
+    background-color: #fff;
+
+    h4 {
+      color: #444;
+    }
+  }
+  ul {
+    list-style: none;
+    color: #444;
+
+    li {
+      font-size: 16px;
+      text-decoration-style: none;
+      font-weight: 400;
+    }
+  }
+}
+
+.new-user {
+  h5 {
+    color: #444;
+    font-size: 14px;
+  }
+  a {
+    text-decoration: underline;
+  }
+}
+
+/** ON MAKING PAYMENT LOADER **/
+.loader {
+  background-color: rgba(0, 0, 0, 0.863);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  padding: 0;
+
+  p {
+    text-align: center;
+    font-size: 22px;
+    padding-top: 24px;
+    color: #ffffffd2;
+    font-weight: 500;
+  }
+  .loader-block-main {
+    width: 100%;
+    height: 120px;
+    position: relative;
+  }
+  .loader-bx {
+    color: #ffffff;
+    font-size: 14px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    text-indent: -9999em;
+    -webkit-animation: loadinganime 1.3s infinite linear;
+    animation: loadinganime 1.3s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 11;
+    margin: 0;
+    transform: translate(-50%, -50%);
+  }
+  @-webkit-keyframes loadinganime {
+    0%,
+    100% {
+      box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+    12.5% {
+      box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    25% {
+      box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    37.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em,
+        0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    50% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em,
+        0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    62.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+    75% {
+      box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em,
+        2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em,
+        -2em -2em 0 0;
+    }
+    87.5% {
+      box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+  }
+  @keyframes loadinganime {
+    0%,
+    100% {
+      box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+    12.5% {
+      box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    25% {
+      box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    37.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em,
+        0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    50% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em,
+        0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    62.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+    75% {
+      box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em,
+        2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em,
+        -2em -2em 0 0;
+    }
+    87.5% {
+      box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+  }
+}

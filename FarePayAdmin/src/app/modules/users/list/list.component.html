@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex inline flex-row align-items-end">
+    <h1>Users</h1>
+    <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+  </div>
+  <div>
+    <button class="btn btn-primary" [routerLink]="[link]">Add {{ href }}</button>
+  </div>
+</div>
+
+
+
+<div class="row mt-4  w-100">
+  <div class="col-12 w-100">
+    <div class="card rounded  w-100">
+      <mat-tab-group class='pt-1' animationDuration="0ms" [(selectedIndex)]="tabIndex"  (selectedIndexChange)="switchPage($event)">
+        <mat-tab (click)="determineTable()" label="Owners">
+          <app-table [users]="users"></app-table>
+        </mat-tab>
+        <mat-tab (click)="determineTable()" label="Drivers">
+          <app-table [users]="users"></app-table>
+        </mat-tab>
+        <mat-tab (click)="determineTable()" label="Touts">
+          <app-table [users]="users"></app-table>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>
+

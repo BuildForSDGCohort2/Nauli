@@ -1,0 +1,57 @@
+<ngx-datatable style="height: calc(100vh - 280px); box-shadow: none" class="material fullscreen" [columnMode]="'force'"
+  [headerHeight]="45" [footerHeight]="50" [rowHeight]="45" [scrollbarV]="true" [rows]="trips"
+  [loadingIndicator]="!trips">
+  <ngx-datatable-column>
+    <ng-template ngx-datatable-header-template>
+      Origin - Destination
+    </ng-template>
+    <ng-template let-row="row" ngx-datatable-cell-template>
+      <span>{{row.vehicleTrip.starting_from}} - {{ row.vehicleTrip.ending_at }}</span>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column>
+    <ng-template ngx-datatable-header-template>
+      Trip Date
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span>{{ row.vehicleTrip.created_at | date }}</span>
+    </ng-template>
+  </ngx-datatable-column>
+  <ngx-datatable-column>
+    <ng-template ngx-datatable-header-template>
+      Travel Time
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span>{{row.vehicleTrip.starting_time | date:"HH:mm"}} - {{ row.vehicleTrip.ending_time | date:"HH:mm" }}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column>
+    <ng-template ngx-datatable-header-template>
+      Fare
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span>KSH {{ row.fare }} </span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column>
+    <ng-template ngx-datatable-header-template>
+      Seat No.
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span># {{ row.seat_no }} </span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="subtitle">
+    <ng-template ngx-datatable-header-template>
+      Actions
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <a [routerLink]="['/trips/detail', row.id]">
+        View</a> &nbsp;
+    </ng-template>
+
+  </ngx-datatable-column>
+</ngx-datatable>

@@ -1,0 +1,57 @@
+<div class="row pl-2 pr-2">
+  <div class="col-md-12">
+      <div class="card shadow-none border-0">
+        <ngx-datatable
+        style="height: calc(100vh - 170px); box-shadow: none"
+        class="material fullscreen"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="60"
+        [scrollbarV]="true"
+        [loadingIndicator]="!users"
+        [sorts]="[{prop: 'type', dir: 'desc'}]"
+        [rows]="users">
+
+            <ngx-datatable-column name="name" [width]="180">
+              <ng-template ngx-datatable-header-template>
+                Name
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="phone">
+              <ng-template ngx-datatable-header-template>
+                Phone number
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="email">
+              <ng-template ngx-datatable-header-template>
+                Email
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="role" [width]="140">
+              <ng-template ngx-datatable-header-template>
+                User Type
+              </ng-template>
+              <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                 {{ row.role | titlecase }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="assignedVehicle" [width]="140" *ngIf="isStaff">
+              <ng-template ngx-datatable-header-template>
+                Assigned
+              </ng-template>
+              <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+              <div 
+                class="p-2 badge" 
+                [ngClass]="(row.assigned_vehicle)?'badge-success':'badge-danger'">
+                <span>
+                  {{ row.assigned_vehicle ? 'Active' : 'Inactive' }}
+                </span>
+              </div>
+
+              </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+      </div>
+  </div>
+</div>

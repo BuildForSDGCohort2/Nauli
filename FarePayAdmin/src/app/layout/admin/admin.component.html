@@ -1,0 +1,20 @@
+<!-- Content Wrapper -->
+<div class="app-admin-wrap layout-sidebar-large">
+
+    <!-- App Header Component -->
+    <div>
+        <app-header></app-header>
+    </div>
+    <!-- Sidenavigation -->
+    <div class="side-content-wrap">
+        <app-sidenav></app-sidenav>
+    </div>
+
+    <!-- Content Wrapper -->
+    <div class="main-content-wrap d-flex flex-column"
+        [ngClass]="{'sidenav-open': navService.sidebarState.sidenavOpen}" 
+         [perfectScrollbar]="{suppressScrollX: true}">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>

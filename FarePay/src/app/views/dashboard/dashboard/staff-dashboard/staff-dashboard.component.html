@@ -1,0 +1,39 @@
+<app-header></app-header>
+
+<div class="user-profile o-hidden mb-5">
+  <div class="user-info mt-2">
+    <h4 class="text-primary pt-3 mb-4">Staff Dashboard</h4>
+  </div>
+
+  <div class="container-fluid mt-2">
+    <div class="row" *ngIf = '!loading'>
+
+      <div class="col-12 " *ngFor="let card of cards">
+        <div class="card mb-5 w-100"  [routerLink]="[card.url]" >
+          <div class="card-body w-100">
+            <div class="row w-100">
+              <div class="col-4">
+                <img src="{{ card.icon }}" class="w-100 p-1" alt="" />
+              </div>
+              <div class="col-8">
+                <div class="pt-3">
+                  <h4 class="card-title">{{ card.title }}</h4>
+                  <a
+                    class="card-text text-white d-flex inline">
+                    <span class="">{{ card.subtitle }}</span>
+                    <i class="material-icons ml-2">keyboard_arrow_right</i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mt-5 pt-5 d-flex justify-content-center" *ngIf="loading">
+      <div class="loader-bubble loader-bubble-info m-5"></div>
+    </div>
+  </div>
+</div>

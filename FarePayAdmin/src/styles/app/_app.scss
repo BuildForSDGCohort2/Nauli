@@ -1,0 +1,38 @@
+// Modue Styling
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+@import "~angular-notifier/styles";
+
+
+// Theme Font
+// @import "themes/font/theme-font";
+// main framework
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "globals/theme-variables";
+@import "globals/globals";
+// bootstrap
+@import "~bootstrap/scss/bootstrap";
+// icon
+@import "../iconsmind/iconsmind";
+
+// @import "themes/font/datta-icon";
+// @import "themes/font/feather";
+// @import "themes/font/fontawesome";
+// @import "themes/font/datta-icon";
+// material
+@import '~@angular/material/theming';
+@include mat-core();
+@import "themes/overrides/material";
+
+// theming
+@import 'themes/layouts/layout';
+
+
+// pages
+@import "themes/pages/global";
+@import "themes/pages/_authentication";
+

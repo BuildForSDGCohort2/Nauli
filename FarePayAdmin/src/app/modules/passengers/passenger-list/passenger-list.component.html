@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex inline flex-row align-items-end">
+    <h1>Passenger Trips</h1>
+    <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+  </div>
+
+</div>
+
+
+<div class="card mt-2">
+  <div class="row">
+
+    <div class="col-12">
+      <div class="card-header border-bottom d-flex justify-content-between p-2">
+        <div>
+          <input id="focusOnSearch" [formControl]="searchControl" type="text" placeholder="Search here.." class="form-control form-control-rounded">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12">
+      <ngx-datatable
+      style="height: calc(100vh - 210px); box-shadow: none"
+        class="material fullscreen"
+        [columnMode]="'force'"
+        [headerHeight]="50"
+        [footerHeight]="50"
+        [rowHeight]="60"
+        [scrollbarV]="true"
+        [loadingIndicator]="!passengers" [sorts]="[{prop: 'name', dir: 'desc'}]" [rows]="passengers">
+
+        <ngx-datatable-column name="name" [width]="180">
+          <ng-template ngx-datatable-header-template>
+            Passenger Name
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <a [routerLink]="['/passengers/detail', row.id]">{{ row.passenger_name | titlecase }}</a>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="pickup_at">
+          <ng-template ngx-datatable-header-template>
+            Trip Origin
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>{{ row.pickup_at | titlecase }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="destination">
+          <ng-template ngx-datatable-header-template>
+            Trip Destination
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>{{ row.drop_at | titlecase }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="cert">
+          <ng-template ngx-datatable-header-template>
+            Seat No.
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            #{{ row.seat_no }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="fare">
+          <ng-template ngx-datatable-header-template>
+            Fare Price
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>KSH {{ row.fare }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="tout">
+          <ng-template ngx-datatable-header-template>
+            Phone Number
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>{{ row.passenger_phone }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="fare">
+          <ng-template ngx-datatable-header-template>
+            Date
+          </ng-template>
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <span>{{ row.created_at | date }}</span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column>
+          <ng-template ngx-datatable-header-template>
+            Actions
+          </ng-template>
+
+          <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+            <a class="cursor" [routerLink]="['/passengers/detail', row.id]">View</a> &nbsp; &nbsp;
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>

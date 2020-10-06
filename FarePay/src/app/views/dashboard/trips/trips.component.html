@@ -1,0 +1,46 @@
+<div class="pr-3 pl-3">
+  <div class="row" [ngClass]="{ 'list-horizontal': viewMode === 'list' }" *ngIf="trips">
+    <!-- SINGLE LIST ITEM   -->
+    <div class="list-item" [ngClass]="{ 'col-md-12': viewMode === 'list' }"
+      [@animate]="{ value: '*', params: { delay: 1 * 100 + 'ms', y: '50px' } }">
+      <div class="small">
+        <section class="card" *ngFor="let item of trips; let i = index">
+          <div class="row">
+            <div class="card__face__colored-side"></div>
+            <div class="col-4 dateData">
+              <img src="assets/images/busBlue.svg" alt="bus" /> <br />
+              
+            </div>
+            <div class="col-8 card-content">
+              <strong class="header"> {{ item?.vehicleTrip?.starting_from }} - {{ item?.vehicleTrip?.ending_at }}</strong>&nbsp;
+              <hr class="m-2 p-0 pb-1" />
+              Date: <span>{{ item?.vehicleTrip?.created_at | date  }}</span> <br />
+              Starting Time: <span>{{ item?.vehicleTrip?.starting_time  | date:'shortTime' }}</span>
+
+              <div class="d-flex justify-content-between mb-2">
+                <div>
+                  <a class="text-primary text-left" *ngIf="item.price">Fare: KSH {{ item?.fare }}</a>
+                  <a class="text-primary text-left" *ngIf="!item.price">Fare: KSH {{ item?.fare }}</a>
+                </div>
+                <div>
+                  <a class="badge badge-primary text-6 pr-1 pl-1" *ngIf="!!item.vehicleTrip &&  !item.vehicleTrip.ending_time">In Progress</a>
+                  <a class="badge badge-success text-6 pr-1 pl-1" *ngIf="!!item.vehicleTrip && !!item.vehicleTrip.ending_time">Complete</a>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div class="d-flex text-center stuff justify-content-center" *ngIf="!!trips && trips.length === 0">
+        <h3 class="p-3 text-center mt-4">No Trips Found!</h3>
+    </div>
+  </div>
+
+  <div class="mt-5 pt-5 d-flex justify-content-center" *ngIf="!trips">
+    <div class="loader-bubble loader-bubble-info m-5"></div>
+  </div>
+</div>
+<!-- DATA LIST -->

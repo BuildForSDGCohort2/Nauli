@@ -1,0 +1,30 @@
+<div class="auth-wrapper">
+    <div class="row h-100">
+        <div class="col-12 d-flex justify-content-center align-items-center auth-side-form">
+            <div [ngSwitch]="form">
+                <div *ngSwitchCase="'login'">
+                    <app-login></app-login>
+                </div>
+                <div *ngSwitchCase="'register'">
+                    <app-signup></app-signup>
+                </div>
+                <div *ngSwitchCase="'reset-password'">
+                    <app-reset-password></app-reset-password>
+                </div>
+                <div *ngSwitchDefault>
+                    <app-login></app-login>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="col-lg-8 d-flex justify-content-center align-items-center">
+            <div class="w-100 auth-side-img">
+                <h5 class="font-weight-normal pl-5 text-center">
+                    We provide custom digital menus that helps restaurants engage better with their customers.
+                </h5>
+                <img src="assets/images/auth/appbackground.webp" alt="FoodiesAppImage" class="img-fluid">
+
+            </div>
+        </div> -->
+    </div>
+</div>

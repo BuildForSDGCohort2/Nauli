@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<div class="text-center  mt-4">
+  <h4 class="text-primary">Trip Receipt</h4>
+</div>
+
+<div class="container">
+
+    <div class="main">
+      <h1 class="pb-3">Hi,</h1>
+      <h2 class="pb-1">Thank you for riding with us today!</h2>
+      <p>Vehicle: {{data?.vehicleTrip.vehicle.regNo }}, Seat No: {{data?.seat_no }}</p>
+      <p>Date: {{data?.created_at | date}}, at {{ data?.created_at | date:'HH:MM' }}</p>
+    </div>
+    <div class="location">
+      <div class="location__line"></div>
+
+      <div class="location__pickup">
+        <h3>Pick-up </h3>
+        <p>{{data?.vehicleTrip?.starting_from}}, <br>Kenya</p>
+      </div>
+      <div class="location__dropoff">
+        <h3>Drop-off <span></span></h3>
+        <p>{{data?.vehicleTrip.ending_at}}, <br>Kenya</p>
+      </div>
+    </div>
+    
+    <h2 class="receipt__title">Fare Details</h2>
+    <div class="receipt">
+      <div class="receipt__grid1">
+        <p>Fare</p>
+        <p>Service Charge</p>
+        <p>Discount</p>
+        <p class="total pt-1">Total</p>
+      </div>
+      <div class="receipt__grid2">
+        <p>KSH {{data?.fare}}</p>
+        <p>KSH 0.00</p>
+        <p>N/A</p>
+        <p class="total pt-1">KSH {{data?.fare}}</p>
+      </div>
+    </div>
+    </div>
+    
+  
+    <div class="d-flex p-4 inline justify-content-center veiw-trip">
+      <h5 class="text-primary text-center" (click)="change()">View Your Trips</h5>
+  </div>
+  

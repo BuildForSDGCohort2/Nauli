@@ -1,0 +1,8 @@
+<nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
+    <ol class="breadcrumb pt-0">
+        <li class="breadcrumb-item" *ngFor="let crumb of breadcrumbsDetails; let i=index" >
+            <a class="text-muted" [routerLink]="[crumb.url]">{{ crumb.name | titlecase }}</a>
+        </li>
+    </ol>
+  </nav>
+  

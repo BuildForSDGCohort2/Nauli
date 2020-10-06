@@ -1,0 +1,77 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+body{
+    overflow-x: hidden;
+    @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700');
+    font-family: 'Raleway', sans-serif !important;
+  }
+
+ngb-tabset.nav-center .nav-tabs {
+    margin-bottom: 0.5rem;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+  }
+
+/**Navbar*/
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: fixed;
+    height: 60px;
+    z-index: 100;
+    margin: -8px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    width: 120%;
+    color: white;
+    font-weight: 600;
+    border-bottom: solid 1px #DCDDE1;
+  }
+
+  .toolbar img {
+    margin: 1px 18px;
+  }
+
+  .toolbar{
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 8px 0;
+    }
+  
+    p {
+      margin: 0;
+    }
+  
+    span{
+      color: #3A87D9;
+      margin-left: -20px;
+      font-size: 18px;
+      margin-top: 18px;
+      cursor: pointer;
+    }
+
+
+
+  a,
+  a:hover {
+    color: #1976d2;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  a:hover {
+    color: #125699;
+  }
+
+}

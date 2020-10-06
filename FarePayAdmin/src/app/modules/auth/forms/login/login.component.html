@@ -1,0 +1,43 @@
+<div class="mb-4">
+    <a class="d-flex justify-content-center">
+      <img width="180px" alt="Logo" src="assets/images/Logo.png" />
+    </a>
+    <p class="text-center text-15 text-primary">Simple & Transparent Fare Payments</p>
+  </div>
+
+<div class="auth-side-form">
+        <h2 class="text-center">Login to your account</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <mat-form-field appearance="outline" class="mb-1">
+                <mat-label>Phone Number</mat-label>
+                <input matInput type="phoneNumber" formControlName="phone" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="f.phone.hasError('required')">Phone number is required</mat-error>
+                <mat-error *ngIf="f.phone.hasError('pattern')">Invalid phone number</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mb-1">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="f.password.hasError('required')">Password is required</mat-error>
+            </mat-form-field>
+            <button mat-button class="w-100 btn btn-primary text-white mat-btn-100">
+                <span *ngIf='!loading'>Log In</span>
+                <div *ngIf='loading'>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Logging in...
+                </div>
+            </button>
+        </form>
+
+        <div class="text-center mt-2" *ngIf="submitted && !!error">
+            <p class="text-danger">{{ error }}</p>
+        </div>
+
+        <div class="text-center mt-4">
+            <p class="text-muted">Forgot password?&nbsp;<a [routerLink]="['/auth/reset-password']"
+                    class="text-dark link">Reset</a></p>
+        </div>
+</div>
+
+
+<notifier-container></notifier-container>

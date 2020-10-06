@@ -1,0 +1,89 @@
+<body [ngClass]="{'stopScroll': waitForPayment}">
+    <app-header></app-header>
+
+    <div class="mt-1">
+        <a class="d-flex justify-content-center mt-5">
+            <img width="180px" alt="Logo" src="assets/images/logo.png" />
+        </a>
+        <p class="text-center text-15 text-primary">Simple & Transparent Fare Payments</p>
+    </div>
+    
+    <div *ngIf = '!loading'>
+    
+        <div class="d-flex justify-content-center details">
+            <div class="card  m-0 mt-4 mb-2 p-0 shadow-none  details">
+                <div class="card-header">
+                    <h4>Trip Details</h4>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>Vehicle: &nbsp; &nbsp;  <span class=""> {{ trip?.vehicle?.vehicleType }} </span></li>
+                        <li>Reg No: &nbsp; &nbsp;  <span class=""> {{ trip?.vehicle?.regNo | uppercase }} </span></li>
+                        <li>Origin: &nbsp; &nbsp;  <span class=""> {{ trip?.starting_from }} </span></li>
+                        <li>Destination: &nbsp; &nbsp;  <span class=""> {{ trip?.ending_at }} </span></li>
+                        <li>Seat No: &nbsp; &nbsp;  <span class=""> #{{ seatNo }} </span></li>
+                        <li>Fare Price: &nbsp; &nbsp;   <span class="">KSH {{ trip?.price }} </span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    
+        <div class="cont">
+            <div class="form">
+                <form [formGroup]="form">
+                    <h5 class="pb-2 text-muted">To quickly make payment via MPESA, {{ !!user ? 'confirm' : 'enter' }} your phone
+                        number.</h5>
+                    <input type="text" class="user" placeholder="2547xxxxxxxx" formControlName="phone" />
+                    <button class="login btn btn-primary text-warning" (click)="requestSTK()"
+                        [disabled]="buttonDisabled">
+    
+                        <span *ngIf='!loadingSTK'>Quick Pay</span>
+                        <div *ngIf='loadingSTK'>
+                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                            Processing payment..
+                        </div>
+                    </button>
+                </form>
+            </div>
+    
+            <div class="new-user mt-4" *ngIf="!user && !waitForPayment">
+                <h5>Register an account to make future payments faster and get upto <strong>50% off</strong> for the first 3 fare
+                    payments.</h5> <br>
+                <h5> <a [routerLink]="['/auth/register']">Register Now</a></h5>
+            </div>
+    
+            <div class="new-user mt-4" *ngIf="user && !waitForPayment">
+                <h5>Check out your recorded trips.</h5>
+                <h5> <a [routerLink]="['/passenger']">App Dashboard</a></h5>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div *ngIf="loading">
+    
+        <div class="mt-5 pt-5 d-flex justify-content-center">
+            <div class="loader-bubble loader-bubble-info m-5"></div>
+          </div>
+    
+    </div>
+    
+    
+    
+    
+    
+    <div class="loader d-flex justify-content-center" *ngIf = "waitForPayment">
+        <div class="d-flex justify-content-center flex-column">
+            <div class="loader-block-main">
+                <div class="loader-bx"></div>
+            </div>
+        
+            <p> Awaiting Payment Confirmation </p> 
+        </div>
+         
+    </div>
+    
+    
+    
+    
+</body>

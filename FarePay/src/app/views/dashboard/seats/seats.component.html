@@ -1,0 +1,404 @@
+<!-- NavBar -->
+<app-back-header></app-back-header>
+<div class="d-flex inline justify-content-between p-3 pb-0 mt-2 mb-2">
+  <h4 class="pt-1 text-primary">Mini Bus - 14 Passengers</h4>
+  <a [routerLink]="['/dashboard']">
+    <button class="btn btn-rounded btn-icon btn-outline-primary" >
+      <i class="material-icons md-28 pt-1">keyboard_arrow_left</i>
+    </button>
+  </a>
+</div>
+
+<div class="user-profile o-hidden mb-5">
+  <div class="user-info mt-2">
+    <h6 *ngIf="!!activeTrip">{{ activeTrip.from }}  -  {{ activeTrip.to }}</h6>
+    <div class="d-flex justify-content-around">
+      <div class="mr-2 text-success" *ngIf="type !== 'passenger'">
+        <svg
+          width="3em"
+          height="3em"
+          viewBox="0 0 16 16"
+          class="bi bi-dot"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        Paid
+      </div>
+      <div class="mr-2 ml-2 text-danger" *ngIf="type !== 'passenger'">
+        <svg
+          width="3em"
+          height="3em"
+          viewBox="0 0 16 16"
+          class="bi bi-dot"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        Unpaid
+      </div>
+
+      <div class="mr-2 text-success" *ngIf="type === 'passenger'">
+        <svg
+          width="3em"
+          height="3em"
+          viewBox="0 0 16 16"
+          class="bi bi-dot"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        Occupied
+      </div>
+
+      <div class="mr-2 ml-2">
+        <svg
+          width="3em"
+          height="3em"
+          viewBox="0 0 16 16"
+          class="bi bi-dot"
+          fill="#999"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        <span class="text-muted">
+          Unoccupied
+        </span>
+      </div>
+      <div class="mr-2 ml-2 text-primary" *ngIf="type === 'passenger'">
+        <svg
+          width="3em"
+          height="3em"
+          viewBox="0 0 16 16"
+          class="bi bi-dot"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"
+          />
+        </svg>
+        Staff
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-4" *ngFor="let seat of seats; let i = index">
+        <div
+          class="card pt-1 pb-1 mb-3"
+          (click)="paySeat(modalConfirm, modalUpdate, seat)"
+        >
+          <div class="text-center">{{ seat.type | titlecase }}</div>
+
+          <div class="d-flex justify-content-center p-2">
+            <img src="{{ getSeat(seat) }}" alt="" />
+          </div>
+          <div class="text-center">Seat: #{{ seat.num }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 pt-5 d-flex justify-content-center" *ngIf="!seats">
+  <div class="loader-bubble loader-bubble-info m-5"></div>
+</div>
+
+<ng-template #modalUpdate let-modal>
+  <div class="modal-header">
+    <div>
+      <h4 class="modal-title" id="modal-title">Record Payment</h4>
+      <p class="pb-0 mb-0">Record payment for seat {{ selectedSeat.num }}</p>
+    </div>
+    <button
+      id="deselector"
+      type="button"
+      class="close"
+      aria-label="Close button"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row methodP">
+      <div class="col-8 d-flex align-items-center">
+        <p *ngIf="!selectedSeat.occupationStatus">
+          <label class="checkbox checkbox-primary" (click)="updateSeat(selectedSeat, {field: 'occupationStatus', value: true})">
+            <input type="checkbox" [checked]="selectedSeat.occupationStatus" />
+            <span>Mark seat as occupied</span>
+            <span class="checkmark"></span>
+          </label>
+        </p>
+        <p *ngIf="selectedSeat.occupationStatus">
+          <label class="checkbox checkbox-primary" (click)="updateSeat(selectedSeat, {field: 'occupationStatus', value: false})">
+            <input type="checkbox" [checked]="selectedSeat.occupationStatus" />
+            <span>Mark seat as unoccupied</span>
+            <span class="checkmark"></span>
+          </label>
+        </p>
+        <p *ngIf="!selectedSeat.paymentStatus && selectedSeat.occupationStatus">
+          <label class="checkbox checkbox-primary" (click)="updateSeat(selectedSeat, {field: 'paymentStatus', value: true})">
+            <input type="checkbox" [checked]="selectedSeat.paymentStatus" />
+            <span>Mark seat as paid</span>
+            <span class="checkmark"></span>
+          </label>
+        </p>
+        <p *ngIf="selectedSeat.paymentStatus && selectedSeat.occupationStatus">
+          <label class="checkbox checkbox-primary" (click)="updateSeat(selectedSeat, {field: 'paymentStatus', value: false})">
+            <input type="checkbox" [checked]="selectedSeat.paymentStatus" />
+            <span>Mark seat as unpaid</span>
+            <span class="checkmark"></span>
+          </label>
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalConfirm let-modal>
+  <div class="modal-header">
+    <div>
+      <h4 class="modal-title" id="modal-title">Select payment method</h4>
+      <p class="pb-0 mb-0">Payment for seat {{ selectedSeat.num }}</p>
+    </div>
+    <button
+      id="deselector"
+      type="button"
+      class="close"
+      aria-label="Close button"
+      aria-describedby="modal-title"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div
+      class="row methodP"
+      (click)="deselectModal()"
+      data-toggle="modal"
+      data-target="#mpesaDialog"
+    >
+      <div class="col-4 d-flex align-items-center">
+        <img src="assets/images/mpesa.png" alt="" class="w-75" />
+      </div>
+      <div class="col-8 d-flex align-items-center">
+        <p>
+          MPESA
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="row methodP"
+      (click)="deselectModal()"
+      data-toggle="modal"
+      data-target="#visaDialog"
+    >
+      <div class="col-4 d-flex align-items-center">
+        <img src="assets/images/visa.png" alt="" class="w-75" />
+      </div>
+      <div class="col-8 d-flex align-items-center">
+        <p>
+          Visa Card
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="row methodP"
+      (click)="deselectModal()"
+      data-toggle="modal"
+      data-target="#masterCardDialog"
+    >
+      <div class="col-4 d-flex align-items-center">
+        <img src="assets/images/master-card.png" alt="" class="w-75" />
+      </div>
+      <div class="col-8 d-flex align-items-center">
+        <p>
+          Master Card
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="mpesaDialog"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex inline align-items-center">
+          <img
+            src="assets/images/mpesa.png"
+            alt=""
+            style="height: 40px; width: auto;"
+          />
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You will receive an MPESA payment prompt of Ksh 100 to paybill 365474
+          in a short while
+        </p>
+        <p>
+          If you do not receive the prompt, please follow the steps below to
+          complete fare payment.
+        </p>
+        <ol>
+          <li>Step 1</li>
+          <li>Step 2</li>
+          <li>Step 3</li>
+          <li>Step 4</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="visaDialog"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex inline align-items-center">
+          <img
+            src="assets/images/visa.png"
+            alt=""
+            style="height: 40px; width: auto;"
+          />
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You will receive an MPESA payment prompt of Ksh 100 to paybill 365474
+          in a short while
+        </p>
+        <p>
+          If you do not receive the prompt, please follow the steps below to
+          complete fare payment.
+        </p>
+        <ol>
+          <li>Step 1</li>
+          <li>Step 2</li>
+          <li>Step 3</li>
+          <li>Step 4</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="masterCardDialog"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="d-flex inline align-items-center">
+          <img
+            src="assets/images/master-card.png"
+            alt=""
+            style="height: 40px; width: auto;"
+          />
+        </div>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>
+          You will receive an MPESA payment prompt of Ksh 100 to paybill 365474
+          in a short while
+        </p>
+        <p>
+          If you do not receive the prompt, please follow the steps below to
+          complete fare payment.
+        </p>
+        <ol>
+          <li>Step 1</li>
+          <li>Step 2</li>
+          <li>Step 3</li>
+          <li>Step 4</li>
+        </ol>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

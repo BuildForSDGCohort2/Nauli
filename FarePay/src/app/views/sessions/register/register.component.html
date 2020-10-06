@@ -1,0 +1,28 @@
+<div class="mt-3">
+  <a class="d-flex justify-content-center mt-5">
+    <img width="180px" alt="Logo" src="assets/images/logo.png" />
+  </a>
+  <p class="text-center text-15 text-primary">Simple & Transparent Fare Payments</p>
+</div>
+
+<div class="cont">
+  <div class="form">
+    <form action="" [formGroup]="loginForm">
+      <h1>Register</h1>
+      <input type="text" class="user" placeholder="07xxxxxxxx" formControlName="phone" />
+      <input type="text" class="user" placeholder="Name"  formControlName="name"/>
+      <input type="password" class="pass" placeholder="Password" formControlName="password"/>
+      <button class="login btn btn-primary text-warning" (click)="onSubmit()">
+        <span *ngIf='!loading'>Register</span>
+        <div *ngIf='loading'>
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Registering...
+        </div>
+      </button>
+    </form>
+  </div>
+
+  <h5 class="mt-4">Already have account? <a [routerLink]="['/auth/login']">Login</a></h5>
+</div>
+
+<notifier-container></notifier-container>

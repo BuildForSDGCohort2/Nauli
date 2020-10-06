@@ -1,0 +1,110 @@
+<div class="d-flex justify-content-between">
+  <div class="d-flex inline flex-row align-items-end">
+    <h1>Trips</h1>
+    <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+  </div>
+
+</div>
+
+
+
+
+<div class="card mt-2">
+  <div class="row">
+  <div class="col-12">
+    <div class="card-header border-bottom d-flex justify-content-between p-2">
+      <div>
+        <input id="focusOnSearch" [formControl]="searchControl" type="text" placeholder="Search here.." class="form-control form-control-rounded">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12">
+
+    <ngx-datatable
+      style="height: calc(100vh - 210px); box-shadow: none"
+      class="material fullscreen"
+      [columnMode]="'force'"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [rowHeight]="60"
+      [scrollbarV]="true"
+      [rows]="trips"
+      [loadingIndicator]="!trips">
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          Route
+        </ng-template>
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <span>{{row.starting_from}} - {{ row.ending_at }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          Vehicle Reg. No.
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <span>{{ row.vehicle.regNo }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          Vehicle Type
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <span>{{ row.vehicle.vehicleType }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="drive">
+        <ng-template ngx-datatable-header-template>
+          Driver
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <div>
+            <a [routerLink]="['/drivers', row.driver.id]">{{ row.driver.name| titlecase }}</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="tout">
+        <ng-template ngx-datatable-header-template>
+          Conductor
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <div>
+            <a [routerLink]="['/touts', row.tout.id]">{{ row.tout.name| titlecase }}</a>
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="time">
+        <ng-template ngx-datatable-header-template>
+          Period
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <span *ngIf="row.ending_time">{{ row.starting_time | date:"HH:mm" }} -
+            {{ row.ending_time | date:"HH:mm" }}</span>
+          <div *ngIf="!row.ending_time"> <span>{{ row.starting_time | date:"HH:mm" }} - </span> <span
+              class="text-success">Ongoing</span></div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column>
+        <ng-template ngx-datatable-header-template>
+          Fare
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <span>KSH {{ row.max_rate }}</span>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="subtitle">
+        <ng-template ngx-datatable-header-template>
+          Actions
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+          <a [routerLink]="['/trips/detail', row.id]">
+            View</a> &nbsp;
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+
+  </div>
+</div>

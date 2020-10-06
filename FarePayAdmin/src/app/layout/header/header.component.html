@@ -1,0 +1,22 @@
+<section class="fixed-top main-header">
+
+
+           <div class="d-flex justify-content-between p-2">
+            <div class="">
+                <img src="assets/images/Logo.png" alt="" style="width: 100px;" />
+            </div>
+
+            <div ngbDropdown [placement]="'bottom-left'" class="d-lex float-right" *ngIf="!!username">
+                <div class="btn-group">
+                  <button class="border border-primary rounded-circle p-2 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span>{{ abbreviation | uppercase }}</span>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item">{{ username | titlecase }}</button>
+                    <button class="dropdown-item" (click)="logOut()">Sign Out</button>
+                  </div>
+                </div>
+              </div>
+           </div>
+
+</section>

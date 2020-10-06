@@ -1,0 +1,19 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white border-bottom-primary"
+>
+  <a (click)="goToDashBoard()" class="">
+    <img width="100px" alt="Logo" src="assets/images/logo.png" />
+  </a>
+  <div ngbDropdown [placement]="'bottom-left'">
+    <div class="btn-group" *ngIf="!!abbreviation">
+      <button class="border border-primary rounded-circle p-2 mt-2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>{{ abbreviation | uppercase }}</span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <button class="dropdown-item">{{ username | titlecase }}</button>
+        <button class="dropdown-item" (click)="logOut()">Sign Out</button>
+      </div>
+    </div>
+  </div>
+</nav>
+

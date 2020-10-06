@@ -1,0 +1,13 @@
+$blue:    #0f3272 !default;
+
+
+.card {
+    background-color: $blue;
+    color: #fff;
+    box-shadow: none;
+
+    .card-title {
+        color: #fff;
+        font-weight: 600;
+    }
+}

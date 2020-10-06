@@ -1,0 +1,8 @@
+
+<div *ngIf="isPassenger">
+ <app-passenger-dashboard></app-passenger-dashboard>
+</div>
+
+<div *ngIf="!isPassenger">
+  <app-staff-dashboard></app-staff-dashboard>
+</div>

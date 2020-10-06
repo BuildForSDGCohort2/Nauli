@@ -1,0 +1,29 @@
+
+
+.card-body{
+    width: 75%;
+    margin: 0 auto;
+    @media screen and (max-width: 575px) {
+        width: 100%;
+        .header-cover{
+            
+            height: 600px;
+        }
+    }
+}
+
+.profile-picture{
+    z-index: 90 !important;
+}
+
+ngb-tab{
+    margin-top: 5px;
+}
+
+.nav-tabs{
+    margin-bottom: 0;
+}
+
+.app-header{
+    margin-bottom: 2px;
+}

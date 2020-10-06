@@ -1,0 +1,18 @@
+/*
+ *
+ *   GULL - Angular Bootstrap Admin Template
+ *
+ *
+*/
+
+
+@import 'variables';
+
+@import "~angular-notifier/styles";
+
+// @import 'themes/lite-blue';
+@import 'themes/lite-purple';
+@import '../vendor/bootstrap/bootstrap.scss';
+@import "bootstrap-rtl.scss";
+@import 'globals/globals';
+@import "~@ng-select/ng-select/themes/ant.design.theme.css";

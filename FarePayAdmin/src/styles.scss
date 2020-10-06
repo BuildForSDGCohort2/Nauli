@@ -1,0 +1,35 @@
+/* Global styles */
+
+@import 'styles/app/_app.scss';
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  color: rgb(36, 36, 36);
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+
+.card-header {
+  background-color: #fff !important;
+  h3 {
+    margin-bottom: 2px;
+  }
+}
+
+
+.btn-primary {
+  background-color: #051F51 !important;
+
+  &:hover {
+    background-color: #052051e7 !important;
+ 
+  }
+}

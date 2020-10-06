@@ -1,0 +1,47 @@
+
+<app-header></app-header>
+<div class="d-flex inline justify-content-between p-3 pb-0 mt-2">
+  <h4 class="pt-1 text-primary">Search Available Trips</h4>
+  <a [routerLink]="['/dashboard']">
+    <button class="btn btn-rounded btn-icon btn-outline-primary">
+      <i class="material-icons md-28 pt-1">keyboard_arrow_left</i>
+    </button>
+  </a>
+</div>
+
+  
+  
+  <div class="user-profile o-hidden mb-4">
+
+    <div class="center" *ngIf="loading">
+      <div class="loader-bubble loader-bubble-info m-5"></div>
+    </div>
+
+    <div *ngIf="found" class="mt-5">
+      <div class="small" *ngFor="let results of trips">
+        <section class="card m-3 mt-0" (click)="book(results.vehicle.regNo)">
+            <div class="row">
+                <div class="card__face__colored-side"></div>
+                <div class="col-4 dateData">
+                  <img src="assets/images/busBlue.svg" alt="bus" > <br>
+                  <p>{{results.vehicle.regNo }}</p> <br>
+                  <!-- <p></p> -->
+                </div>
+                <div class="col-8 card-content">
+                  <strong class=header> {{results.starting_from}} - {{results.ending_at}}</strong> &nbsp;<span>({{results.sacco.name }})</span>                   
+                  <hr class="m-2 p-0 pb-1">
+                  <!-- Date: <span>{{results.date }}</span> <br> -->
+                  Time: <span>{{ results.starting_time | date:'medium'}}</span>
+
+                  <div class="location d-flex inline justify-content-between mt-4">
+                      <div><a class="badge badge-success text-12" >KSH {{ results.price }}</a></div>
+                      <div><h5 class="badge badge-primary text-12 pr-1 pl-1">Book</h5></div>
+                    </div>
+                </div>
+            </div>
+          </section>
+      </div>
+    </div>
+  
+  </div>
+  

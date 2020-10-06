@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-between">
+    <div class="d-flex inline flex-row align-items-end">
+      <h1>Users</h1>
+      <app-breadcrumbs class=" pl-4 pb-1"></app-breadcrumbs>
+    </div>
+  
+  </div>
+
+
+  <div class="card">
+      <div class="card-header">
+          <h3>Add {{role | titlecase}} Details</h3>
+      </div>
+      <div class="card-body">
+
+    <form [formGroup]="userForm" class="container p-2">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Firstname</mat-label>
+                    <input matInput type="firstname" formControlName="firstname" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.firstname.hasError('required')">Firstname is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Lastname</mat-label>
+                    <input matInput type="lastname" formControlName="lastname" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.lastname.hasError('required')">Lastname is required</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput type="phone" formControlName="phone" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.phone.hasError('required')">Phone number is required</mat-error>
+                    <mat-error *ngIf="uForm.phone.hasError('pattern')">Invalid phone number</mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="outline" class="mb-1">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" formControlName="email" [errorStateMatcher]="matcher">
+                    <mat-error *ngIf="uForm.email.hasError('required')">email number is required</mat-error>
+                    <mat-error *ngIf="uForm.email.hasError('email')">Invalid email</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+      <div class="row">
+
+
+          <div class="col-6">
+            <button mat-button class="w-100 btn btn-primary text-white mat-btn-100" (click)="register()">
+                <span *ngIf='!loading'>Register</span>
+                <div *ngIf='loading'>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Registering...
+                </div>
+            </button>
+          </div>
+      </div>
+    </form>
+      </div>
+  </div>
+
+  <notifier-container></notifier-container>
